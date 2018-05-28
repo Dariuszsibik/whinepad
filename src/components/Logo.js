@@ -1,4 +1,5 @@
 import React from 'react';
+import '../css/components/Logo.css';
 
 class Logo extends React.Component {
   render() {
