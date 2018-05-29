@@ -16,7 +16,7 @@ ReactDOM.render(
 <div>
   <h1>
     <Logo /> Witaj w Whinepad!
-  </h1>,
+  </h1>
   <Excel headers={headers} initialData={data} />
 </div>,
   document.getElementById('pad')

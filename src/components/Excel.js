@@ -5,8 +5,8 @@ class Excel extends React.Component {
 constructor(props) {
   super(props);
   this.state ={
-    headers: Array(),
-    initialData: Array(Array()),
+//    headers: Array(),
+//    initialData: Array(Array()),
     data: this.props.initialData,
     sortby: null,
     descending: false,
@@ -157,7 +157,7 @@ constructor(props) {
                   var content = cell;
                   var edit = this.state.edit;
                   if (edit && edit.row === rowidx && edit.cell === idx) {
-                    var content = (
+                    content = (
                       <form onSubmit={this._save}>
                         <input type="text" defaultValue={cell} />
                       </form>
