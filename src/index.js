@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Logo from './components/Logo.js';
 import Button from './components/Button';
 import Suggest from './components/Suggest.js';
+import Rating from './components/Rating.js';
 
 ReactDOM.render(
 <div style={{padding: '20px'}}>
@@ -12,7 +13,7 @@ ReactDOM.render(
 <div> Początkowa wartość 4: <Rating defaultValue={4} /></div>
 <div> Tutaj najwyższa wartość wynosi 11: <Rating max={11} /></div>
 <div> Tylko do odczytu: <Rating readonly={true} defaultValue={3} /></div>
-</div>
+</div>,
 
   document.getElementById('pad')
 );
