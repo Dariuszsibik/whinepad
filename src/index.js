@@ -6,18 +6,14 @@ import Suggest from './components/Suggest.js';
 import Rating from './components/Rating.js';
 import FormInput from './components/Forminput.js';
 import Form from './components/Form.js';
+import Actions from './components/Actions.js';
 
 ReactDOM.render(
 <div style={{padding: '20px'}}>
   <h1>Wykrywacz Komponentów</h1>
 
-    <Form
-        fields={[
-            {label: 'Ocena', type: 'rating', id: 'rateme'},
-            {label: 'Pozdrowienia', id:'freetext'},
-        ]}
-        initialData={{rateme:4, freetext: 'Witaj'}} 
-    />
+<h2> akcje </h2>
+<div><Actions onAction={type => alert(type)} /> </div>
 
 
 </div>,
