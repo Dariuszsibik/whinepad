@@ -8,7 +8,7 @@ class Rating extends Component {
         super(props);
         this.state = {
             rating: props.defaultValue,
-            tmpRating: props.defaultValue,
+            tmpRationg: props.defaultValue,
         };
         this.reset = this.reset.bind(this);
         //this.setTemp = this.reset.bind(this);
@@ -19,12 +19,12 @@ class Rating extends Component {
     }
 
     setTemp(rating) {
-        this.setState({ tmprating: rating});
+        this.setState({ tmpRationg: rating});
     }
 
     setRating(rating) {
         this.setState({
-            tmprating: rating,
+            tmpRationg: rating,
             rating: rating,
         })
     }
@@ -42,7 +42,7 @@ class Rating extends Component {
         for (let i = 1; i <= this.props.max; i++) {
             stars.push(
                 <span
-                className={i <= this.state.tmprating ? 'RatingOn' : null}
+                className={i <= this.state.tmpRationg ? 'RatingOn' : null}
                 key={i}
                 onClick={() => !this.props.readonly && this.setRating.bind(this, i)}
                 onMouseOver={() => !this.props.readonly && this.setTemp.bind(this, i)}
