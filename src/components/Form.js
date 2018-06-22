@@ -1,15 +1,16 @@
-import FormInput from './Forminput';
+import FormInput from './FormInput';
 import Rating from './Rating';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'; 
 
 class Form extends Component {
+    
     getData() {
         let data = {};
-        this.props.fields.forEach(field =>
-            data[field.id] = this.refs[field.id].getValue()
+        this.props.fields.forEach(field => 
+          data[field.id] = this.refs[field.id].getValue()
         );
-    return data;
+        return data;
 }
     render() {
     return(
@@ -30,7 +31,7 @@ class Form extends Component {
             <div className="FormRow" key={field.id}>
                 <span className="FormLabel">{field.label}:</span>
                     {
-                        field.type === 'reting'
+                        field.type === 'rating'
                         ? <Rating readonly={true} defaulValue={parseInt(prefilled, 10)} />
                         : <div>{prefilled}</div>
                     }

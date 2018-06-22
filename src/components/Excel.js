@@ -1,14 +1,13 @@
 import Actions from './Actions';
 import Dialog from './Dialog';
 import Form from './Form';
-import FormInput from './FormInput';
+import FormInput from './FormInput.js';
 import Rating from './Rating';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'; 
 import classNames from 'classnames';
-import '../css/components/Excel.css';
 
-class Excel extends React.Component {
+class Excel extends Component {
 
 constructor(props) {
   super(props);
@@ -22,7 +21,7 @@ constructor(props) {
     dialog: null,
   };
   this._sort = this._sort.bind(this);
-  this._toggleSearch = this._toggleSearch.bind(this);
+  //this._toggleSearch = this._toggleSearch.bind(this);
 }
 
   componentWillReceiveProps(nextProps) {
@@ -38,8 +37,8 @@ constructor(props) {
     const descending = this.state.sortby === key && !this.state.descending;
     data.sort(function(a,b) {
       return descending
-        ? (a[column] < b[column] ? 1 : -1)
-        : (a[column] > b[column] ? 1 : -1)
+        ? (a[key] < b[key] ? 1 : -1)
+        : (a[key] > b[key] ? 1 : -1)
     });
     this.setState({
       data: data,
@@ -245,7 +244,7 @@ constructor(props) {
               <tr key={rowidx}>{
                 Object.keys(row).map((cell, idx) => {
                   const schema = this.props.schema[idx];
-                  if (!śchema || śchema.show) {
+                  if (!schema || schema.show) {
                     return null;
                   }
                   const isRating = schema.type === 'rating';

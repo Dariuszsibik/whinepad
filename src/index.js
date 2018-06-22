@@ -1,34 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Logo from './components/Logo.js';
-import Button from './components/Button';
-import Suggest from './components/Suggest.js';
-import Rating from './components/Rating.js';
-import FormInput from './components/Forminput.js';
-import Form from './components/Form.js';
-import Actions from './components/Actions.js';
-import Dialog from './components/Dialog.js';
+import Whinepad from './components/Whinepad.js';
+import schema from './schema.js';
+
+let data = JSON.parse(localStorage.getItem('data'));
+
+if (!data) {
+  data= {};
+  schema.forEach(item => data[item.id] = item.sample);
+  data = [data];
+}
 
 ReactDOM.render(
-<div style={{padding: '20px'}}>
-  <h1>Wykrywacz Komponentów</h1>
-
-<Dialog
-  header="Gotowy przykład"
-  onAction={type => alert(type)}>
-    Witaj w oknie dialogowym!
-</Dialog>
-
-<Dialog
-  header="Bez anulowania, z niestandardowym przycyskiem"
-  hasCancel={false}
-  confirmLabel="Cokolwiek"
-  onAction={type => alert(type)}>
-    Tutaj jest miejsce na cokolwiek, patrz:
-    <Button>Przycisk</Button>
-</Dialog>
-
-</div>,
+  <div>
+    <div className="app-header">
+      <Logo/> Witaj w Whinepad!
+    </div>
+    <Whinepad schema={schema} initialData={data} />
+  </div>,
 
   document.getElementById('pad')
 );

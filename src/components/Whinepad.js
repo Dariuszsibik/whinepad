@@ -5,7 +5,7 @@ import Form from './Form';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'; 
 
-class Whinepad extends Comment {
+class Whinepad extends Component {
 
     constructor(props) {
         super(props);
@@ -62,8 +62,8 @@ class Whinepad extends Comment {
         }
         const field = this.props.schema.map(item => item.id);
         const searchdata = this._preSearchData.filter(row => {
-            for (let f = 0; f < fields.length; f++) {
-                if (row[fields[f]].toString().toLowerCase().indexOf(needle) > -1) {
+            for (let f = 0; f < field.length; f++) {
+                if (row[field[f]].toString().toLowerCase().indexOf(needle) > -1) {
                     return true;
                 }
             }
@@ -72,46 +72,46 @@ class Whinepad extends Comment {
         this.setState({data: searchdata});
     }
 
-    render() {
-        return (
-            <div className="Whinepad">
-                <div className="WhinepadToolbar">
-                    <div className="WhinepadToolbarAdd">
-                        <Button
-                            onClick={this._addNewDialog.bind(this)}
-                            className="WhinepadToolbarAddButton">
-                            + dodaj
-                        </Button>
-                    </div>
-                    <div className="WhinepadToolbarSearch">
-                        <input
-                        placeholder="Wyszukaj..."
-                        onChange={this._search.bind(this)}
-                        onFocus={this._startSearching.bind(this)}
-                        onBlur={this._doneSearching.bind(this)} />
-                    </div>
-                </div>
-                <div className="WhinepadDatagrid">
-                    <Excel
-                        schema={this.props.schema}
-                        initialData={this.state.data}
-                        onDataChange={this._onExcelDataChange.bind(this)} />
-                </div>
-                {this.state.addnew
-                ? <Dialog
-                    modal={true}
-                    header="Dodaj nowy element"
-                    confirmLabel="Dodaj"
-                    onAction={this._addNew.bind(this)}
-                >
-                <Form 
-                    ref="form"
-                    fields={this.props.schema} />
-                </Dialog>
-                : null }
-            </div>
-        );
-    }
+ render() {
+    return (
+      <div className="Whinepad">
+        <div className="WhinepadToolbar">
+          <div className="WhinepadToolbarAdd">
+            <Button 
+              onClick={this._addNewDialog.bind(this)}
+              className="WhinepadToolbarAddButton">
+              + dodaj
+            </Button>
+          </div>
+          <div className="WhinepadToolbarSearch">
+            <input 
+              placeholder="Wyszukaj..." 
+              onChange={this._search.bind(this)}
+              onFocus={this._startSearching.bind(this)}
+              onBlur={this._doneSearching.bind(this)}/>
+          </div>
+        </div>
+        <div className="WhinepadDatagrid">
+          <Excel 
+            schema={this.props.schema}
+            initialData={this.state.data}
+            onDataChange={this._onExcelDataChange.bind(this)} />
+        </div>
+        {this.state.addnew
+          ? <Dialog 
+              modal={true}
+              header="Dodaj nowy element"
+              confirmLabel="Dodaj"
+              onAction={this._addNew.bind(this)}
+            >
+              <Form
+                ref="form"
+                fields={this.props.schema} />
+            </Dialog>
+          : null}
+      </div>
+    );
+  }
 }
 
 
