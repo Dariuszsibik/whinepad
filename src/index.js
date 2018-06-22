@@ -6,9 +6,10 @@ import schema from './schema.js';
 
 let data = JSON.parse(localStorage.getItem('data'));
 
+// domyślne dane przykładowe, odczytane z obiektu schema
 if (!data) {
-  data= {};
-  schema.forEach(item => data[item.id] = item.sample);
+  data = {};
+  schema.forEach((item) => data[item.id] = item.sample);
   data = [data];
 }
 
@@ -19,6 +20,5 @@ ReactDOM.render(
     </div>
     <Whinepad schema={schema} initialData={data} />
   </div>,
-
   document.getElementById('pad')
 );
