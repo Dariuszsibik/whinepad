@@ -4,13 +4,13 @@ import Logo from './components/Logo.js';
 import Whinepad from './components/Whinepad.js';
 import schema from './schema.js';
 
-let data = JSON.parse(localStorage.getItem('data'));
-
-// domyślne dane przykładowe, odczytane z obiektu schema
-if (!data) {
-  data = {};
-  schema.forEach((item) => data[item.id] = item.sample);
-  data = [data];
+let data: Array<Object>;
+const storage: ?string = localStorage.getItem('data');
+if (!storage) {
+  data = [{}];
+  schema.forEach(item => data[0][item.id] = item.sample);      
+} else {
+  data = JSON.parse(storage);
 }
 
 ReactDOM.render(

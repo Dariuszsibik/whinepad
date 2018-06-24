@@ -17,12 +17,10 @@ class Rating extends Component {
   }
   
   setTemp(rating) {
-    console.log('jestem w setTemp ' + rating + ' ' + this.state.tmpRating)
     this.setState({tmpRating: rating});
   }
 
   setRating(rating) {
-    console.log(rating)
     this.setState({
       tmpRating: rating,
       rating: rating,
