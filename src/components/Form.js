@@ -1,9 +1,9 @@
+/* @flow */
 import FormInput from './FormInput';
 import Rating from './Rating';
-import React, {Component} from 'react';
-// import PropTypes from 'prop-types'; 
 import CRUDStore from '../flux/CRUDStore';
 import type {FormInputField, FormInputFieldValue} from './FormInput';
+import React, {Component} from 'react';
 
 type Props = {
   readonly?: boolean,

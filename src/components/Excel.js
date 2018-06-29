@@ -1,16 +1,15 @@
 /* @flow */
 
-// import * as Immutable from 'immutable';
+import * as Immutable from 'immutable';
 import Actions from './Actions';
 import Dialog from './Dialog';
 import Form from './Form';
 import FormInput from './FormInput.js';
 import Rating from './Rating';
 import React, {Component} from 'react';
-import PropTypes from 'prop-types'; 
 import classNames from 'classnames';
 import CRUDStore from '../flux/CRUDStore';
-import CRUDActions from '../flux/CRUDStore';
+import CRUDActions from '../flux/CRUDActions';
 import invariant from 'invariant';
 
 
@@ -142,7 +141,7 @@ class Excel extends Component {
         modal={true}
         header="Potwierdź usunięcie"
         confirmLabel="Usuń"
-        onAction={this._deleteConfirmationClick.bind(this)}
+        onAction={() => {this._deleteConfirmationClick()}}
       >
         {`Czy na pewno chcesz usunąć "${nameguess}"?`}
       </Dialog>

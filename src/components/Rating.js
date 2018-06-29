@@ -1,10 +1,31 @@
+/* @flow */
+
 import React, {Component} from 'react';
-import PropTypes from 'prop-types'; 
 import classNames from 'classnames';
 
+type Props = {
+  defaultValue: number,
+  readonly: boolean,
+  max: number,
+};
+
+type State = {
+  rating: number,
+  tmpRating: number,
+};
+
 class Rating extends Component {
-    
-  constructor(props) {
+  
+  props: Props;
+  state: State;
+  
+  static defaultProps = {
+    defaultValue: 0,
+    max: 5,
+    readonly: false,
+  };
+  
+  constructor(props: Props) {
     super(props);
     this.state = {
       rating: props.defaultValue,
@@ -12,15 +33,15 @@ class Rating extends Component {
     };
   }
   
-  getValue() {
+  getValue(): number {
     return this.state.rating;
   }
   
-  setTemp(rating) {
+  setTemp(rating: number) {
     this.setState({tmpRating: rating});
   }
 
-  setRating(rating) {
+  setRating(rating: number) {
     this.setState({
       tmpRating: rating,
       rating: rating,
@@ -31,19 +52,19 @@ class Rating extends Component {
     this.setTemp(this.state.rating);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     this.setRating(nextProps.defaultValue);
   }
  
   render() {
     const stars = [];
-    for (let i = 1; i <= this.props.max; i++) {
+    for (let i: number = 1; i <= this.props.max; i++) {
       stars.push(
         <span 
           className={i <= this.state.tmpRating ? 'RatingOn' : null}
           key={i}
           onClick={() => {!this.props.readonly && this.setRating(i)}}
-          onMouseOver={() => {!this.props.readonly && this.setTemp(i)}}
+          onMouseOver={() => {!this.props.readonly && this.setTemp( i)}}
         >
           &#9734;
         </span>);
@@ -54,7 +75,7 @@ class Rating extends Component {
           'Rating': true,
           'RatingReadonly': this.props.readonly,
         })}
-        onMouseOut={() => {this.reset()}}
+        onMouseOut={this.reset.bind(this)}
       >
         {stars}
         {this.props.readonly || !this.props.id
@@ -69,17 +90,4 @@ class Rating extends Component {
   }  
 }
 
-Rating.propTypes = {
-  defaultValue: PropTypes.number,
-  readonly: PropTypes.bool,
-  max: PropTypes.number,
-};
-
-Rating.defaultProps = {
-  defaultValue: 0,
-  max: 5,
-};
-
 export default Rating
-
-  
