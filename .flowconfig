@@ -1,10 +1,13 @@
 [ignore]
+.*/fbemitter/node_modules/.*
 .*/react/node_modules/.*
 
 [include]
 node_modules/react
 node_modules/react-dom
 node_modules/classnames
+node_modules/fbemitter
+node_modules/immutable
 [libs]
 
 [lints]

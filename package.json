@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
+    "eslint": "^5.0.0",
+    "immutable": "^3.8.2",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-addons-test-utils": "^15.6.2",
@@ -15,5 +17,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "fbemitter": "^2.1.1"
   }
 }

@@ -1,9 +1,26 @@
 import FormInput from './FormInput';
 import Rating from './Rating';
 import React, {Component} from 'react';
-import PropTypes from 'prop-types'; 
+// import PropTypes from 'prop-types'; 
+import CRUDStore from '../flux/CRUDStore';
+
+
+type Props = {
+  readonly?: boolean,
+  recordId: ?number,
+};
 
 class Form extends Component {
+  fields: Array<Object>;
+  initialData: ?Object;
+
+  constructor(props: Props) {
+    super(props);
+    this.fields = CRUDStore.getSchema();
+      if('recordId' in this.props) {
+        this.initialData = CRUDStore.getRecord(this.props.recordId);
+      }
+  }
 
     getData() {
       let data = {};
@@ -43,6 +60,7 @@ class Form extends Component {
     }
   }
   
+  /*
   Form.propTypes = {
     fields: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -53,6 +71,7 @@ class Form extends Component {
     initialData: PropTypes.object,
     readonly: PropTypes.bool,
   };
-  
+  */
+
   export default Form
   

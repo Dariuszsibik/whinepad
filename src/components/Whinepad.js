@@ -1,39 +1,50 @@
+/*@flow*/
+
 import Button from './Button';
 import Dialog from './Dialog';
 import Excel from './Excel';
 import Form from './Form';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'; 
+import CRUDStore from '../flux/CRUDStore';
+import CRUDActions from '../flux/CRUDActions';
 
 class Whinepad extends Component {
-
-    constructor(props) {
-      super(props);
-      this.state = {
-        data: props.initialData,
-        addnew: false,
-      };
-      this._preSearchData = null;
-    }
+  
+  state: State;
+  
+  constructor() {
+    super();
+    this.state = {
+      addnew: false,
+      count: CRUDStore.getCount(),
+    };
     
+    CRUDStore.addListener('change', () => {
+      this.setState({
+        count: CRUDStore.getCount(),
+      })
+    });
+  }
+    
+    shouldComponentUpdate(newProps: Object, newState: State): boolean {
+      return(
+        newState.adnew !== this.state.addnew ||
+        newState.count !== this.state.count
+      );
+    }
+
     _addNewDialog() {
       this.setState({addnew: true});
     }
     
-    _addNew(action) {
-      if (action === 'dismiss') {
-        this.setState({addnew: false});
-        return;
+    _addNew(action: string) {
+      this.setState({addnew: false});
+      if (action === 'confirm') {
+        CRUDActions.create(this.refs.form.getData());
       }
-      let data = Array.from(this.state.data);
-      data.unshift(this.refs.form.getData());
-      this.setState({
-        addnew: false,
-        data: data,
-      });
-      this._commitToStorage(data);
     }
-    
+
     _onExcelDataChange(data) {
       this.setState({data: data});
       this._commitToStorage(data);
@@ -84,17 +95,16 @@ class Whinepad extends Component {
             </div>
             <div className="WhinepadToolbarSearch">
               <input 
-                placeholder="Wyszukaj..." 
-                onChange={this._search.bind(this)}
-                onFocus={this._startSearching.bind(this)}
-                onBlur={this._doneSearching.bind(this)}/>
+                placeholder={this.state.count === 1
+                  ? 'Wyszukaj 1 rekord...'
+                  : `Wyszukaj $(this.state.count} rekordów...`
+                }
+                onChange={CRUDActions.search.bind(CRUDActions)}
+                onFocus={CRUDActions.startSearching.bind(CRUDActions)} />
             </div>
           </div>
           <div className="WhinepadDatagrid">
-            <Excel 
-              schema={this.props.schema}
-              initialData={this.state.data}
-              onDataChange={this._onExcelDataChange.bind(this)} />
+            <Excel />
           </div>
           {this.state.addnew
             ? <Dialog 
