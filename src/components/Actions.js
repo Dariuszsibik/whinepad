@@ -1,7 +1,10 @@
-import PropTypes from 'prop-types'; 
 import React from 'react';
 
-const Actions = props =>  
+type Props = {
+  onAction: Function,
+};
+
+const Actions = (props: Props) =>
   <div className="Actions">
     <span 
       tabIndex="0"
@@ -20,12 +23,9 @@ const Actions = props =>
       onClick={props.onAction.bind(null, 'delete')}>x</span>
   </div>
 
-Actions.propTypes = {
-  onAction: PropTypes.func,
-};
-
 Actions.defaultProps = {
   onAction: () => {},
 };
 
 export default Actions
+
